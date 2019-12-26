@@ -17,13 +17,6 @@ stdenv.mkDerivation {
 
   enableParallelBuilding = true;
 
-  # Skip byte-compiling of emacs-lisp files because this is currently
-  # broken in ledger...
-  postInstall = ''
-    mkdir -p $out/share/emacs/site-lisp/
-    cp -v "$src/lisp/"*.el $out/share/emacs/site-lisp/
-  '';
-
   cmakeFlags = [ "-DCMAKE_INSTALL_LIBDIR=lib" ];
 
   buildPhase = "make -j$NIX_BUILD_CORES";
